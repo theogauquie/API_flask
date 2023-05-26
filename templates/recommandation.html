@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/recommandation.css">
+    <title>Recommandation d'hôtel</title>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-section">
+            <img src="https://static.tacdn.com/img2/brand/home/homemar2022_mw_trans@2x.webp" alt="">
+            <h2>Bienvenue sur votre profile {{ username }}</h2>
+        </div>
+        <div class="commentes">
+            <h3>Hôtels commentés :</h3>
+            <select class="hotel-dropdown">
+                <option value="">Sélectionnez un hôtel</option>
+                {% for hotel_commente in hotels_commentes %}
+                <option>{{ hotel_commente }}</option>
+                {% endfor %}
+            </select>
+            
+        </div>
+        <div class="commentaire-zone">
+            <h3>Commentaire :</h3>
+            <p id="commentaire"></p>
+        </div>
+        
+        <script>
+            var dropdown = document.querySelector('.hotel-dropdown');
+            var commentaireParagraphe = document.getElementById('commentaire');
+        
+            dropdown.addEventListener('change', function() {
+                var selectedHotel = dropdown.value;
+                var commentaires = {
+                    {% for hotel, commentaire in commentaires.items() %}
+                    "{{ hotel }}": "{{ commentaire }}",
+                    {% endfor %}
+                };
+                commentaireParagraphe.textContent = commentaires[selectedHotel] || "";
+            })
+        </script>
+
+        <div class="recommandes">
+            <h3>Hôtels recommandés :</h3>
+            <ul>
+                {% for hotel_recommande in hotels_recommandes %}
+                <li>{{ hotel_recommande }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="logout">
+            <a href="/">Déconnexion</a>
+        </div>
+        <div class="ajouter-commentaire">
+            <a href="/ajouter-commentaire">Ajouter un commentaire</a>
+        </div>
+    </div>
+    <script>
+        // Récupérer la valeur de l'option sélectionnée précédemment
+        var hotelSelectionne = "{{ hotel_selectionne }}";
+    
+        // Sélectionner l'option correspondante dans la liste déroulante
+        if (hotelSelectionne) {
+            var selectElement = document.getElementById("hotel");
+            for (var i = 0; i < selectElement.options.length; i++) {
+                if (selectElement.options[i].value === hotelSelectionne) {
+                    selectElement.options[i].selected = true;
+                    break;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/new_comment.css">
+    <title>Ajouter un commentaire</title>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-section">
+          <!-- Contenu de la section de bienvenue -->
+        </div>
+        <div class="commentaire-form">
+          <form>
+            <div class="form-group">
+              <label for="hotel-dropdown">Hôtels :</label>
+              <select id="hotel" name="hotel">
+                <option value="">Sélectionnez un hôtel</option>
+                {% for hotel in hotels_non_commentes %}
+                <option value="{{ hotel }}">{{ hotel }}</option>
+                {% endfor %}
+            </select>
+            </div>
+            <div class="form-group">
+              <label for="commentaire">Commentaire :</label>
+              <textarea id="commentaire" placeholder="Saisissez votre commentaire"></textarea>
+            </div>
+            <button type="submit">Ajouter un commentaire</button>
+          </form>
+        </div>
+        <div class="bouton-recommandation">
+          <a href="/recommandation" class="btn-recommandation">Revenir à la page recommandation</a>
+        </div>
+      </div>
+      
+</body>
+</html>
